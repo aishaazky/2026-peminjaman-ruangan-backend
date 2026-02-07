@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using SistemPeminjaman.Api.Models;
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDbContext<SistemDbContext>(options =>
+    options.UseSqlite("PeminjamanDb"));
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
