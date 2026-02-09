@@ -37,4 +37,31 @@ public class RuanganController : ControllerBase
 
         return CreatedAtAction(nameof(AmbilSemuaRuangan), new { id = ruanganBaru.Id }, ruanganBaru);
     }
+    // UPDATE: api/Ruangan/5 (Mengubah data ruangan)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateRuangan(int id, RuanganDTO dataUpdate)
+    {
+        var ruangan = await _context.Ruangans.FindAsync(id);
+        if (ruangan == null) return NotFound();
+
+        ruangan.NamaRuangan = dataUpdate.NamaRuangan;
+        ruangan.Lokasi = dataUpdate.Lokasi;
+        ruangan.Kapasitas = dataUpdate.Kapasitas;
+
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
+    // DELETE: api/Ruangan/5 (Menghapus data ruangan)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> HapusRuangan(int id)
+    {
+        var ruangan = await _context.Ruangans.FindAsync(id);
+        if (ruangan == null) return NotFound();
+
+        _context.Ruangans.Remove(ruangan);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
 }
