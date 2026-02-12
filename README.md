@@ -1,34 +1,35 @@
-# Backend Peminjaman Ruangan
+# Sistem Peminjaman Ruangan PENS - Backend API
 
-# Sistem Peminjaman Ruangan - Backend (ASP.NET Core)
+## Description
 
-## Deskripsi
+Backend ini berfungsi sebagai API untuk Sistem Peminjaman Ruangan PENS. Aplikasi ini menangani seluruh logika bisnis, pengelolaan database SQLite, dan manajemen status peminjaman untuk membantu operasional Admin TU.
 
-Proyek ini merupakan bagian dari Sistem Peminjaman Ruangan Kampus yang berfungsi sebagai API (Application Programming Interface). Backend ini menangani pengelolaan data ruangan, proses migrasi database, dan penyediaan data awal (seeding).
+## Features
 
-## Fitur Utama
+- **CRUD Peminjaman**: Pengelolaan data transaksi peminjaman ruangan.
+- **Management Status**: Fitur pembaruan status (Pending, Approved, Rejected).
+- **Room Management**: CRUD data master ruangan kampus.
+- **Swagger UI**: Dokumentasi API interaktif untuk pengujian endpoint.
 
-- **Manajemen Ruangan:** Operasi CRUD (Create, Read, Update, Delete) untuk entitas Ruangan.
-- **Database Migrations:** Pengelolaan skema database menggunakan Entity Framework Core.
-- **Data Seeding:** Penyediaan data awal otomatis untuk keperluan testing.
-- **Swagger UI:** Dokumentasi API interaktif untuk pengujian endpoint.
+## Tech Stack
 
-## Teknologi yang Digunakan
+- **Framework**: ASP.NET Core 10.0
+- **Database**: SQLite
+- **ORM**: Entity Framework Core
 
-- **Framework:** ASP.NET Core 10.0
-- **ORM:** Entity Framework Core
-- **Database:** SQLite
-- **Documentation:** Swashbuckle (Swagger)
+## Installation & Usage
 
-## Cara Instalasi & Menjalankan
-
-1. Pastikan .NET SDK sudah terinstal di komputer Anda.
-2. Masuk ke folder proyek: `cd SistemPeminjaman.Api`.
-3. Lakukan instalasi paket: `dotnet restore`.
-4. Jalankan migrasi database: `dotnet ef database update`.
-5. Jalankan aplikasi: `dotnet run`.
-6. Akses dokumentasi API di browser: `http://localhost:5065/swagger`.
+1. Masuk ke folder proyek: `cd backend/SistemPeminjaman.Api`
+2. Install dependencies: `dotnet restore`
+3. Update database: `dotnet ef database update`
+4. Jalankan aplikasi: `dotnet run`
+5. Akses Swagger di: `http://localhost:5065/swagger`
 
 ## Environment Variables
 
-Aplikasi ini menggunakan konfigurasi default. Database SQLite akan dibuat otomatis dengan nama `PeminjamanDb.db`.
+- **Connection String**: `Data Source=PeminjamanDb.db`
+- **CORS**: Diatur untuk akses dari `http://localhost:5173`
+
+## Author Info
+
+- **Aisha Azkiya Putri** - Teknik Informatika PENS
