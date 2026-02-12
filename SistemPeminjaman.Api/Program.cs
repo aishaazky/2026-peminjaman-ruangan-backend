@@ -3,31 +3,45 @@ using SistemPeminjaman.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Menambahkan layanan agar Controller bisa terbaca
+// --- 1. KONFIGURASI LAYANAN (SERVICES) ---
+
+// Menambahkan CORS (Hanya sekali saja, tidak boleh duplikat)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("IzinReact", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
-// Konfigurasi database SQLite sesuai standar industri
+// Database SQLite
 builder.Services.AddDbContext<SistemDbContext>(options =>
     options.UseSqlite("Data Source=PeminjamanDb.db"));
 
-// Menyiapkan Swagger untuk pengujian API
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Mengaktifkan tampilan Swagger di browser
+// --- 2. KONFIGURASI JALUR (MIDDLEWARE) ---
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// PENTING: UseCors HARUS di atas UseHttpsRedirection atau UseAuthorization
+app.UseCors("IzinReact"); 
+
+// Matikan sementara HttpsRedirection jika port HTTP (5065) yang digunakan
+// app.UseHttpsRedirection(); 
 
 app.UseAuthorization();
-
-// Mengaktifkan rute otomatis ke RuanganController
 app.MapControllers();
 
 app.Run();

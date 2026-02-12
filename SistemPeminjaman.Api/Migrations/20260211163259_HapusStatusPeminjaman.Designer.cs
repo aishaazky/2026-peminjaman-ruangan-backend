@@ -10,14 +10,41 @@ using SistemPeminjaman.Api.Models;
 namespace SistemPeminjaman.Api.Migrations
 {
     [DbContext(typeof(SistemDbContext))]
-    [Migration("20260207183734_InisialisasiTabelRuangan")]
-    partial class InisialisasiTabelRuangan
+    [Migration("20260211163259_HapusStatusPeminjaman")]
+    partial class HapusStatusPeminjaman
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.2");
+
+            modelBuilder.Entity("SistemPeminjaman.Api.Models.Peminjaman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Keperluan")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NamaPeminjam")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Ruangan")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Tanggal")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Peminjamans");
+                });
 
             modelBuilder.Entity("SistemPeminjaman.Api.Models.Ruangan", b =>
                 {
